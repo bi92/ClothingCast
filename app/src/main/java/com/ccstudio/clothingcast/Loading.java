@@ -1,25 +1,24 @@
 package com.ccstudio.clothingcast;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Loading extends AppCompatActivity {
-
+    Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.loading);
-        startLoading();
-    }
+        intent = new Intent(this, SignIn.class);
 
-    private void startLoading() {
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                finish();
+                startActivity(intent);
             }
         }, 3000);
     }
