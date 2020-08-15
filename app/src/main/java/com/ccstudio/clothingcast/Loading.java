@@ -6,6 +6,8 @@ import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+//splash screen
+//가장 처음 나오는 화면 3초뒤에 꺼진다.
 public class Loading extends AppCompatActivity {
     Intent intent;
     @Override

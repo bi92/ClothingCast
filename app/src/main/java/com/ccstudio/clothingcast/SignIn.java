@@ -1,3 +1,19 @@
+/**
+ * Copyright 2016 Google Inc. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.ccstudio.clothingcast;
 
 import androidx.annotation.NonNull;
@@ -29,21 +45,30 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.android.gms.common.SignInButton;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 //구글 로그인 런치화면 뒤에 뜬다
-//로그인이 되어있으면 main_activity로 이동
+//로그인이 되어있고 사용자 등록이 되어있으면 MainActivity로 이동
+//로그인이 되고 사용자 등록이 안되어있으면 UserInfo로 이동
 public class SignIn extends AppCompatActivity implements View.OnClickListener {
     GoogleSignInClient mGoogleSignInClient;
     SignInButton signInBtn;
     int RC_SIGN_IN = 9001;
     private FirebaseAuth mAuth;
     private static final String TAG = "GoogleActivity";
+    FirebaseUser user;
+    FirebaseFirestore db;
+    Intent mainactivity;
+    Intent userinfo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_in);
-        Intent intent = new Intent(this, Loading.class);
-        startActivity(intent);
+        //Intent intent = new Intent(this, Loading.class);
+        //startActivity(intent);
 
         signInBtn = (SignInButton) findViewById(R.id.sign_in_button);
         signInBtn.setOnClickListener(this);
@@ -57,11 +82,9 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
         // Build a GoogleSignInClient with the options specified by gso.
         mGoogleSignInClient  = GoogleSignIn.getClient(this, gso);
         mAuth = FirebaseAuth.getInstance();
-
-//        FirebaseDatabase database = FirebaseDatabase.getInstance();
-//        DatabaseReference myRef = database.getReference("message");
-//
-//        myRef.setValue("mac test");
+        db = FirebaseFirestore.getInstance();
+        mainactivity = new Intent(this, MainActivity.class);
+        userinfo = new Intent(this, UserInfo.class);
     }
 
     @Override
@@ -71,23 +94,49 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
         // Check for existing Google Sign In account, if the user is already signed in
         // the GoogleSignInAccount will be non-null.
         //GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        FirebaseUser account = mAuth.getCurrentUser();
+        user = mAuth.getCurrentUser();
 
-        updateUI(account,null);
+        updateUI(user,null);
     }
 
     //Change UI according to user data.
     public void  updateUI(FirebaseUser account, String state){
         if(account != null){
-            Toast.makeText(this,"로그인 성공",Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-            //startActivity(new Intent(this,AnotherActivity.class));
+//            Toast.makeText(this,"로그인 성공",Toast.LENGTH_LONG).show();
+            checkUser();
         }else {
             if(state == "failed") {
                 Toast.makeText(this, "Google sign in failed", Toast.LENGTH_LONG).show();
             }
         }
+    }
+
+    //유저가 이미 등록되어있으면 메인 페이지로
+    //아니면 정보 등록 페이지로
+    public void checkUser() {
+        //document 이름은 user uid로 해서 구분 가능하게
+        String uid = user.getUid();
+        DocumentReference docRef = db.collection("users").document(uid);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        //유저의 데이터가 있을 경우
+                        //Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                        startActivity(mainactivity);
+                    } else {
+                        //유저의 데이터가 없을 경우
+                        //Log.d(TAG, "No such document");
+                        startActivity(userinfo);
+                    }
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                }
+            }
+        });
     }
 
     private void signIn() {
@@ -127,7 +176,7 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
+                            user = mAuth.getCurrentUser();
                             updateUI(user, null);
                         } else {
                             // If sign in fails, display a message to the user.
