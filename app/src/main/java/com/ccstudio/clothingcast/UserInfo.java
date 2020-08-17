@@ -29,6 +29,8 @@ import com.shawnlin.numberpicker.NumberPicker;
 import java.util.HashMap;
 import java.util.Map;
 
+//사용자의 이름, 성별, 나이 저장
+//이름은 firebase 자체와 cloud 두군데에 저장하고 있는데 나중에 한곳에만 저장하도록 바꾸자
 public class UserInfo extends AppCompatActivity implements View.OnClickListener{
 
     ConstraintLayout genderLayout;
