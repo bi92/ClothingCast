@@ -28,11 +28,5 @@ private Button btn_home;
             }
         });
 
-
     }
-
-
 }
-
-
-//test for git repo

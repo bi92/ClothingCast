@@ -140,7 +140,7 @@ public class weatherDetail extends Fragment {
 
         //adapter 합치기
         listView.setAdapter(w_adapter);
-        listView.setAdapter(week_adapter);
+       // listView.setAdapter(week_adapter);
         return rootView;
     }
     public void  addItem(int iconpath, String fcstTime, String temperature)

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/profile_01"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F4F4F4"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/profileTitle01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="What's your gender?"
+            android:textColor="#000000"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toTopOf="@+id/female_img"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/female_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.26"
+            app:srcCompat="@drawable/female" />
+
+        <ImageView
+            android:id="@+id/male_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/profile_next_01"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/female_img"
+            app:srcCompat="@drawable/male" />
+
+        <Button
+            android:id="@+id/profile_next_01"
+            android:layout_width="140dp"
+            android:layout_height="48dp"
+            android:background="@drawable/button"
+
+            android:text="NEXT"
+            android:textColor="#48648E"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.84000003" />
+
+        <ImageView
+            android:id="@+id/check_female"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="116dp"
+            android:layout_marginLeft="116dp"
+            android:layout_marginBottom="112dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/female_img"
+            app:layout_constraintStart_toStartOf="@+id/female_img"
+            app:srcCompat="@drawable/check" />
+
+        <ImageView
+            android:id="@+id/check_male"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="116dp"
+            android:layout_marginLeft="116dp"
+            android:layout_marginBottom="112dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/male_img"
+            app:layout_constraintStart_toStartOf="@+id/male_img"
+            app:srcCompat="@drawable/check" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:id="@+id/profile_02"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#F4F4F4"
+            android:visibility="visible">
+
+            <Button
+                android:id="@+id/profile_next_02"
+                android:layout_width="140dp"
+                android:layout_height="48dp"
+
+                android:layout_marginTop="200dp"
+                android:layout_marginBottom="50dp"
+                android:background="@drawable/button"
+                android:text="NEXT"
+                android:textColor="#48648E"
+                android:textSize="22sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profileTitle03" />
+
+            <ImageView
+                android:id="@+id/gender_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.26"
+                app:srcCompat="@drawable/female" />
+
+            <TextView
+                android:id="@+id/profileTitle02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="What's your name?"
+                android:textColor="#000000"
+                android:textSize="22sp"
+                app:layout_constraintBottom_toTopOf="@+id/gender_img"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/enter_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/name_input"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="Enter your name"
+                android:inputType="textPersonName"
+                android:textColor="#48648E"
+                android:textColorHint="#A3A3A3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/gender_img" />
+
+            <TextView
+                android:id="@+id/profileTitle03"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="How old are you?"
+                android:textColor="#000000"
+                android:textSize="22sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/enter_name" />
+
+            <com.shawnlin.numberpicker.NumberPicker
+                android:id="@+id/age_selector"
+                android:layout_width="292dp"
+                android:layout_height="103dp"
+                app:layout_constraintBottom_toTopOf="@+id/profile_next_02"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profileTitle03"
+                app:np_dividerType="underline"
+                app:np_max="99"
+                app:np_min="0"
+                app:np_orientation="horizontal"
+                app:np_selectedTextColor="#48648E"
+                app:np_selectedTextSize="50dp"
+                app:np_textColor="#48648E"
+                app:np_textSize="20dp"
+                app:np_value="20"
+                app:np_wheelItemCount="5"
+                app:np_wrapSelectorWheel="true" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
