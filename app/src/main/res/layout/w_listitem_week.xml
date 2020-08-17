@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="90dp"
+    android:id="@+id/w_listitem_week"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/t_fcstWholedate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="bottom|left"
+        android:text="2 . Turs."
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/bar_under"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_weekIcon"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="#DCA7F3"
+        android:gravity="center|center_vertical"
+        android:scaleType="fitXY"
+        android:src="@drawable/w_sunny"
+        app:layout_constraintBottom_toBottomOf="@+id/bar_under"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/bar_under"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_marginBottom="30dp"
+        android:src="@android:color/holo_orange_light"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/t_minTemper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="3dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="bottom|right"
+        android:text="14°"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/bar_under"
+        app:layout_constraintRight_toLeftOf="@+id/slash" />
+
+    <TextView
+        android:id="@+id/slash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="bottom|right"
+        android:text=" / "
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/t_maxTemper"
+        app:layout_constraintBottom_toBottomOf="@+id/bar_under"
+        android:layout_marginBottom="10dp"
+        tools:layout_editor_absoluteY="70dp" />
+
+    <TextView
+        android:id="@+id/t_maxTemper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="bottom|right"
+        android:text="30 °"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/bar_under"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintRight_toLeftOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
