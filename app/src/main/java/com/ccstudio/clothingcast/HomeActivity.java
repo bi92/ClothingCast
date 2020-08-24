@@ -40,8 +40,10 @@ public class HomeActivity extends AppCompatActivity {
     private static Object JSONArray;
     weatherDetail weatherdetail ;
     ImageView iv_curweather;
+    RecommendFragment recommendFragment;
+    FragmentTransaction fragmentTransaction;
 
-
+    FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,18 +70,25 @@ public class HomeActivity extends AppCompatActivity {
         }.start();
 
         weatherdetail = new weatherDetail();
+        recommendFragment = new RecommendFragment();
         this.InitTodaySkyWidget();
+
+
+        //adding recommendFragment to area_weatherDetail
+        fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+
+        fragmentTransaction.replace(R.id.area_weatherDetail,recommendFragment).commitAllowingStateLoss();
 
         iv_curweather = findViewById(R.id.curWeather);
         iv_curweather.setOnClickListener(new View.OnClickListener() {
             @Override
         public void onClick(View view) {
 
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.area_weatherDetail, weatherdetail);
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.area_weatherDetail, weatherdetail).commitAllowingStateLoss();
 
-            fragmentTransaction.commit();
+            //fragmentTransaction.commit();
 
 
             }
@@ -93,10 +102,11 @@ public class HomeActivity extends AppCompatActivity {
     {
         if(index == 1)
         {
-            FragmentManager manager = getSupportFragmentManager();
-            FragmentTransaction transaction = manager.beginTransaction();
-            transaction.remove(weatherdetail);
-            transaction.commit();
+            //FragmentManager manager = getSupportFragmentManager();
+            //FragmentTransaction transaction = manager.beginTransaction();
+            fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.area_weatherDetail,recommendFragment).commitAllowingStateLoss();
+            //transaction.commit();
         }
     }
 
