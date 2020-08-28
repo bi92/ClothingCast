@@ -84,8 +84,8 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
         mGoogleSignInClient  = GoogleSignIn.getClient(this, gso);
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
-        //mainactivity = new Intent(this, MainActivity.class);
-        mainactivity = new Intent(this, AddClothesActivity.class);
+        mainactivity = new Intent(this, MainActivity.class);
+        //mainactivity = new Intent(this, AddClothesActivity.class);
 
         userinfo = new Intent(this, UserInfo.class);
     }
