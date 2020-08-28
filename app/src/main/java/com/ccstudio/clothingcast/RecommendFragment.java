@@ -3,6 +3,7 @@ package com.ccstudio.clothingcast;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -91,6 +92,7 @@ public class RecommendFragment extends Fragment {
             public void onSuccess(byte[] bytes) {
                 // Data for "images/island.jpg" is returns, use this as needed
                 Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+
                 ImageView temp = (ImageView)getView().findViewById(R.id.imageView2);
                 temp.setImageBitmap(bitmap);
             }

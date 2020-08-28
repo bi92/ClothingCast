@@ -26,6 +26,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 //https://github.com/firebase/snippets-android/blob/2228558fde6e576636e5ceadfe00ce0b9bdc0cdd/database/app/src/main/java/com/google/firebase/referencecode/database/MainActivity.java#L40-L44
+import com.ccstudio.clothingcast.View.AddClothesActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -84,6 +85,8 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         mainactivity = new Intent(this, MainActivity.class);
+        //mainactivity = new Intent(this, AddClothesActivity.class);
+
         userinfo = new Intent(this, UserInfo.class);
     }
 
