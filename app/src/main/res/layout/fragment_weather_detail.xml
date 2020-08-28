@@ -2,11 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id ="@+id/frag_weatherDetail"
+    android:id="@+id/frag_weatherDetail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00FFF6"
-    android:layout_marginTop="200dp"
+    android:layout_marginTop="0dp"
+    android:background="#FFFFFF"
     app:layout_constraintBottom_toBottomOf="parent"
     tools:context=".weatherDetail">
 
@@ -30,7 +30,6 @@
         android:layout_marginLeft="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
-        android:background="#FFFF00"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -49,11 +48,10 @@
             android:layout_marginTop="120dp"
             android:src="@android:color/holo_orange_light" />
 
-        <ListView
-            android:id="@+id/lv_timeSkyState"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_today"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:layout_above="@+id/w_bar_01"
             android:layout_below="@id/w_bar_00"
             android:layout_alignTop="@+id/w_bar_00"
@@ -62,13 +60,14 @@
             android:layout_alignParentLeft="true"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:background="#FF6767">
+            android:background="#FFFFFF"
+            android:scrollbars="vertical">
 
 
-        </ListView>
+        </androidx.recyclerview.widget.RecyclerView>
 
-        <ListView
-            android:id="@+id/lv_weekview"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_weekly"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
@@ -79,10 +78,10 @@
             android:layout_alignParentBottom="true"
             android:layout_marginTop="0dp"
             android:layout_marginBottom="30dp"
-            android:background="#005EFF">
+            android:background="#FFFFFF">
 
 
-        </ListView>
+        </androidx.recyclerview.widget.RecyclerView>
 
     </RelativeLayout>
 

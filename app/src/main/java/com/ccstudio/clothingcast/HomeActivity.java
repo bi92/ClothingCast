@@ -528,6 +528,7 @@ public class HomeActivity extends AppCompatActivity {
                             //임시 저장 - > 두개 다 채워졌을 때 하늘 상태 설정
                             temp_skyPty[1] = data.get("fcstValue").toString();
                             recent_skyPty.put(gap,temp_skyPty);
+                            System.out.println("강수 정보"+data.get("fcstValue").toString());
                         }
 
                         //시간별 오늘 날씨 갖기 6~21시까지

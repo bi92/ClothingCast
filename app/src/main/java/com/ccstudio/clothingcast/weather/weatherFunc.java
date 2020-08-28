@@ -221,7 +221,7 @@ public class weatherFunc {
                 case"3": //구름많고 눈
                     result = w_state.cloudy_snow;
                     break;
-
+                case"1"://비
                 case"4": //구름많고 비
                 case"5": //구름많고 비
                     result = w_state.cloudy_rain;
@@ -246,6 +246,7 @@ public class weatherFunc {
                     result = w_state.fog_snow;
                     break;
 
+                case"1"://비
                 case"4": //흐리고 비
                 case"5": //흐리고 비
                     result = w_state.fog_rain;
@@ -257,6 +258,13 @@ public class weatherFunc {
                     break;
 
             }
+        }
+
+        System.out.println("SKY :: "+SKY+"  PTY "+PTY);
+        if(result!= null)
+        {
+
+            System.out.println("  결과 "+result.name());
         }
 
         return result;

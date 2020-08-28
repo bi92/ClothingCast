@@ -2,7 +2,7 @@ package com.ccstudio.clothingcast.weather;
 
 import android.graphics.drawable.Drawable;
 
-public class W_TodayData {
+public class W_TodayData extends WeatherItem {
 
     private int iconPath;
     private  Drawable icon ;
