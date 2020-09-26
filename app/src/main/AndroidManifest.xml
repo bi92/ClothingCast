@@ -24,6 +24,9 @@
         <activity android:name=".HomeActivity"></activity>
         <activity android:name=".weatherManager" />
 
+        <activity android:name=".View.MyClosetActivity"></activity>
+        <activity android:name=".View.DiaryActivity"></activity>
+
     </application>
 
 </manifest>

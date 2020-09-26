@@ -1,19 +1,26 @@
 package com.ccstudio.clothingcast;
 
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.ccstudio.clothingcast.View.DiaryActivity;
+import com.ccstudio.clothingcast.View.MyClosetActivity;
 import com.ccstudio.clothingcast.weather.W_TodayData;
 import com.ccstudio.clothingcast.weather.requestInfo;
 import com.ccstudio.clothingcast.weather.weatherFunc;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -49,6 +56,34 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        //set bottom navigation bar
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(R.id.page_home);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            Intent intent;
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.page_diary:
+                        intent = new Intent(getBaseContext(), DiaryActivity.class);
+                        startActivity(intent);
+                        overridePendingTransition(0, 0);
+                        break;
+//                    case R.id.page_home:
+//                        intent = new Intent(getBaseContext(), HomeActivity.class);
+//                        startActivity(intent);
+//                        overridePendingTransition(0, 0);
+//                        break;
+                    case R.id.page_closet:
+                        intent = new Intent(getBaseContext(), MyClosetActivity.class);
+                        startActivity(intent);
+                        overridePendingTransition(0, 0);
+                        break;
+                }
+                return true;
+            }
+        });
 
         //날씨 데이터 받아오기
 

@@ -84,7 +84,7 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
                 .build();
         // Build a GoogleSignInClient with the options specified by gso.
         mGoogleSignInClient  = GoogleSignIn.getClient(this, gso);
-        mainactivity = new Intent(this, MainActivity.class);
+        mainactivity = new Intent(this, HomeActivity.class);
         //mainactivity = new Intent(this, AddClothesActivity.class);
 
         userinfo = new Intent(this, UserInfo.class);
