@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.ccstudio.clothingcast.MyCloset.MyClosetActivity;
+import com.ccstudio.clothingcast.mycloset.MyClosetActivity;
 import com.ccstudio.clothingcast.weather.W_TodayData;
 import com.ccstudio.clothingcast.weather.requestInfo;
 import com.ccstudio.clothingcast.weather.weatherFunc;

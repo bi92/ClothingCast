@@ -1,4 +1,4 @@
-package com.ccstudio.clothingcast.MyCloset;
+package com.ccstudio.clothingcast.mycloset;
 
 public class MyCloset {
 

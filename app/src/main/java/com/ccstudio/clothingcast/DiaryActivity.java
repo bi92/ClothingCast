@@ -7,9 +7,7 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.ccstudio.clothingcast.HomeActivity;
-import com.ccstudio.clothingcast.MyCloset.MyClosetActivity;
-import com.ccstudio.clothingcast.R;
+import com.ccstudio.clothingcast.mycloset.MyClosetActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class DiaryActivity  extends AppCompatActivity {

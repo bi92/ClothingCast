@@ -1,4 +1,4 @@
-package com.ccstudio.clothingcast.MyCloset;
+package com.ccstudio.clothingcast.mycloset;
 
 import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
