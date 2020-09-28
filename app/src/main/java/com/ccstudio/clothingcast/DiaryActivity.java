@@ -1,4 +1,4 @@
-package com.ccstudio.clothingcast.View;
+package com.ccstudio.clothingcast;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ccstudio.clothingcast.HomeActivity;
+import com.ccstudio.clothingcast.MyCloset.MyClosetActivity;
 import com.ccstudio.clothingcast.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 

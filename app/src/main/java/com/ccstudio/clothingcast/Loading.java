@@ -21,6 +21,7 @@ public class Loading extends AppCompatActivity {
             @Override
             public void run() {
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         }, 3000);
     }

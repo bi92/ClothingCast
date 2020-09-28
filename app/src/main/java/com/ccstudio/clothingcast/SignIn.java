@@ -130,10 +130,12 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
                         //유저의 데이터가 있을 경우
                         //Log.d(TAG, "DocumentSnapshot data: " + document.getData());
                         startActivity(mainactivity);
+                        overridePendingTransition(0, 0);
                     } else {
                         //유저의 데이터가 없을 경우
                         //Log.d(TAG, "No such document");
                         startActivity(userinfo);
+                        overridePendingTransition(0, 0);
                     }
                 } else {
                     Log.d(TAG, "get failed with ", task.getException());

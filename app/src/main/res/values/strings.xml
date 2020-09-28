@@ -4,4 +4,5 @@
     <string name="closet">Closet</string>
     <string name="home">Home</string>
     <string name="calendar">Calendar</string>
+    <string name="closet_title">My Closet</string>
 </resources>

@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -15,8 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.ccstudio.clothingcast.View.DiaryActivity;
-import com.ccstudio.clothingcast.View.MyClosetActivity;
+import com.ccstudio.clothingcast.MyCloset.MyClosetActivity;
 import com.ccstudio.clothingcast.weather.W_TodayData;
 import com.ccstudio.clothingcast.weather.requestInfo;
 import com.ccstudio.clothingcast.weather.weatherFunc;
