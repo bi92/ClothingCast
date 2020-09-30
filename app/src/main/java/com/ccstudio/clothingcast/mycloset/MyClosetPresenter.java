@@ -11,16 +11,21 @@ public class MyClosetPresenter {
     }
 
     public void updateBackground(int weather) {
+        view.removeBackground(closet.getCurrentWeather());
         closet.setCurrentWeather(weather);
-        view.removeBackground();
-        view.updateWCurrentWeather(closet.getCurrentWeather());
-        view.updateBackground();
+        view.updateBackground(closet.getCurrentWeather());
+    }
+
+    public void toEditMode() {
+        view.toEditMode();
     }
 
     public interface View {
-        void removeBackground();
-        void updateWCurrentWeather(int weather);
-        void updateBackground();
+        void removeBackground(int weather);
+        void updateBackground(int weather);
+        void toClosetMain();
+        void toEditMode();
+        void toAddMode();
     }
 
 }

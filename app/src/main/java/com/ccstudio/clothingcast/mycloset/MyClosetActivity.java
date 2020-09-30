@@ -5,6 +5,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -24,17 +25,16 @@ public class MyClosetActivity  extends AppCompatActivity implements MyClosetPres
     private ImageView buttonRain;
     private ImageView buttonSnow;
     private ImageView buttonEdit;
+    private Button buttonAdd;
 
     private float[] topRadii = {40,40,40,40,0,0,0,0}; //양쪽 다 둥근것
     private float[] rightRadii = {0,0,40,40,0,0,0,0}; //오른쪽만 둥근것
     private float[] leftRadii = {40,40,0,0,0,0,0,0}; //왼쪽만 둥근것
 
     private GradientDrawable backgroundCloset;
-    private int currentWeather = 0; // 0 : sun  1 : cloud   2 : rain  3 : snow
 
-    //set bottom navigation
     protected void setBottomNavigation() {
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.page_closet);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             Intent intent;
@@ -51,11 +51,10 @@ public class MyClosetActivity  extends AppCompatActivity implements MyClosetPres
                         startActivity(intent);
                         overridePendingTransition(0, 0);
                         break;
-//                    case R.id.page_closet:
-//                        intent = new Intent(getBaseContext(), MyClosetActivity.class);
-//                        startActivity(intent);
-//                        overridePendingTransition(0, 0);
-//                        break;
+                    case R.id.page_closet:
+                        //no changes (same page)
+                        break;
+                    default:
                 }
                 return true;
             }
@@ -72,19 +71,22 @@ public class MyClosetActivity  extends AppCompatActivity implements MyClosetPres
         presenter = new MyClosetPresenter(this);
 
         //set ini
-        buttonEdit = (ImageView) findViewById(R.id.button_closet_edit);
+        buttonEdit = findViewById(R.id.button_closet_edit);
         buttonEdit.setOnClickListener(this);
 
         backgroundCloset = (GradientDrawable) findViewById(R.id.scrollview_closet).getBackground();
-        buttonSun = (ImageView) findViewById(R.id.button_closet_sunny);
+        buttonSun = findViewById(R.id.button_closet_sunny);
         buttonSun.setOnClickListener(this);
-        buttonCloud = (ImageView) findViewById(R.id.button_closet_cloudy);
+        buttonCloud = findViewById(R.id.button_closet_cloudy);
         buttonCloud.setOnClickListener(this);
-        buttonRain = (ImageView) findViewById(R.id.button_closet_rainy);
+        buttonRain = findViewById(R.id.button_closet_rainy);
         buttonRain.setOnClickListener(this);
-        buttonSnow = (ImageView) findViewById(R.id.button_closet_snow);
+        buttonSnow = findViewById(R.id.button_closet_snow);
         buttonSnow.setOnClickListener(this);
 
+        buttonAdd = findViewById(R.id.button_closet_add);
+        buttonAdd.setOnClickListener(this);
+        buttonAdd.setVisibility(View.INVISIBLE); //add button visible only on edit mode
     }
 
     @Override
@@ -98,6 +100,7 @@ public class MyClosetActivity  extends AppCompatActivity implements MyClosetPres
         switch (view.getId()) {
             case R.id.button_closet_edit :
                 //TODO : change page to editing mode
+                presenter.toEditMode();
                 break;
 
             case R.id.button_closet_sunny :
@@ -112,12 +115,15 @@ public class MyClosetActivity  extends AppCompatActivity implements MyClosetPres
             case R.id.button_closet_snow :
                 presenter.updateBackground(3);
                 break;
+
+            case R.id.button_closet_add :
+                break;
             default:
         }
     }
 
     @Override
-    public void removeBackground() {
+    public void removeBackground(int currentWeather) {
         switch (currentWeather) {
             case 0 :
                 buttonSun.setBackgroundResource(0);
@@ -136,12 +142,7 @@ public class MyClosetActivity  extends AppCompatActivity implements MyClosetPres
     }
 
     @Override
-    public void updateWCurrentWeather(int weather) {
-        currentWeather = weather;
-    }
-
-    @Override
-    public void updateBackground() {
+    public void updateBackground(int currentWeather) {
         switch (currentWeather) {
             case 0 :
                 backgroundCloset.setCornerRadii(rightRadii);
@@ -163,7 +164,20 @@ public class MyClosetActivity  extends AppCompatActivity implements MyClosetPres
         }
     }
 
+    @Override
+    public void toClosetMain() {
+        buttonAdd.setVisibility(View.INVISIBLE);
+    }
 
+    @Override
+    public void toEditMode() {
+        buttonAdd.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void toAddMode() {
+
+    }
 }
 
 
