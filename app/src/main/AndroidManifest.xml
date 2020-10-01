@@ -20,10 +20,12 @@
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".SignIn"></activity>
         <activity android:name=".UserInfo"></activity>
-        <activity android:name=".View.AddClothesActivity"/>
 
         <activity android:name=".HomeActivity"></activity>
         <activity android:name=".weatherManager" />
+
+        <activity android:name=".mycloset.MyClosetActivity"></activity>
+        <activity android:name=".DiaryActivity"></activity>
 
     </application>
 

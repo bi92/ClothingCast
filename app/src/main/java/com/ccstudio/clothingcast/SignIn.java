@@ -23,10 +23,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 //https://github.com/firebase/snippets-android/blob/2228558fde6e576636e5ceadfe00ce0b9bdc0cdd/database/app/src/main/java/com/google/firebase/referencecode/database/MainActivity.java#L40-L44
-import com.ccstudio.clothingcast.View.AddClothesActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -34,33 +32,29 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.android.gms.common.SignInButton;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import javax.inject.Inject;
+
 //구글 로그인 런치화면 뒤에 뜬다
 //로그인이 되어있고 사용자 등록이 되어있으면 MainActivity로 이동
 //로그인이 되고 사용자 등록이 안되어있으면 UserInfo로 이동
 public class SignIn extends AppCompatActivity implements View.OnClickListener {
+
+    @Inject MyFirebase firebase;
+
     GoogleSignInClient mGoogleSignInClient;
     SignInButton signInBtn;
     int RC_SIGN_IN = 9001;
-    private FirebaseAuth mAuth;
     private static final String TAG = "GoogleActivity";
-    FirebaseUser user;
-    FirebaseFirestore db;
     Intent mainactivity;
     Intent userinfo;
 
@@ -68,6 +62,14 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_in);
+
+        //dagger2
+        FirebaseComponent component = DaggerFirebaseComponent.builder()
+                .firebaseModule(new FirebaseModule()).build();
+
+        component.inject(this);
+
+
         //Intent intent = new Intent(this, Loading.class);
         //startActivity(intent);
 
@@ -82,9 +84,7 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
                 .build();
         // Build a GoogleSignInClient with the options specified by gso.
         mGoogleSignInClient  = GoogleSignIn.getClient(this, gso);
-        mAuth = FirebaseAuth.getInstance();
-        db = FirebaseFirestore.getInstance();
-        mainactivity = new Intent(this, MainActivity.class);
+        mainactivity = new Intent(this, HomeActivity.class);
         //mainactivity = new Intent(this, AddClothesActivity.class);
 
         userinfo = new Intent(this, UserInfo.class);
@@ -97,9 +97,9 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
         // Check for existing Google Sign In account, if the user is already signed in
         // the GoogleSignInAccount will be non-null.
         //GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        user = mAuth.getCurrentUser();
+        //user = mAuth.getCurrentUser();
 
-        updateUI(user,null);
+        updateUI(firebase.getUser(),null);
     }
 
     //Change UI according to user data.
@@ -118,8 +118,8 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
     //아니면 정보 등록 페이지로
     public void checkUser() {
         //document 이름은 user uid로 해서 구분 가능하게
-        String uid = user.getUid();
-        DocumentReference docRef = db.collection("users").document(uid);
+        String uid = firebase.getUser().getUid();
+        DocumentReference docRef = firebase.getDB().collection("users").document(uid);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -130,10 +130,12 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
                         //유저의 데이터가 있을 경우
                         //Log.d(TAG, "DocumentSnapshot data: " + document.getData());
                         startActivity(mainactivity);
+                        overridePendingTransition(0, 0);
                     } else {
                         //유저의 데이터가 없을 경우
                         //Log.d(TAG, "No such document");
                         startActivity(userinfo);
+                        overridePendingTransition(0, 0);
                     }
                 } else {
                     Log.d(TAG, "get failed with ", task.getException());
@@ -172,15 +174,15 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
 
     private void firebaseAuthWithGoogle(String idToken) {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
-        mAuth.signInWithCredential(credential)
+        firebase.getmAuth().signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
-                            user = mAuth.getCurrentUser();
-                            updateUI(user, null);
+                            //user = mAuth.getCurrentUser();
+                            updateUI(firebase.getUser(), null);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());

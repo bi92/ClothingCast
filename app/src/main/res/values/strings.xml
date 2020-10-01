@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">ClothingCast</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="closet">Closet</string>
+    <string name="home">Home</string>
+    <string name="calendar">Calendar</string>
+    <string name="closet_title">My Closet</string>
 </resources>
