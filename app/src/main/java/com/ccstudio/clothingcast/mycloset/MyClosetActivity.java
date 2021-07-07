@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.ccstudio.clothingcast.AddClothesActivity;
 import com.ccstudio.clothingcast.HomeActivity;
 import com.ccstudio.clothingcast.R;
 import com.ccstudio.clothingcast.DiaryActivity;
@@ -26,40 +27,13 @@ public class MyClosetActivity  extends AppCompatActivity implements MyClosetPres
     private ImageView buttonSnow;
     private ImageView buttonEdit;
     private Button buttonAdd;
+    private Button buttonBack;
 
     private float[] topRadii = {40,40,40,40,0,0,0,0}; //양쪽 다 둥근것
     private float[] rightRadii = {0,0,40,40,0,0,0,0}; //오른쪽만 둥근것
     private float[] leftRadii = {40,40,0,0,0,0,0,0}; //왼쪽만 둥근것
 
     private GradientDrawable backgroundCloset;
-
-    protected void setBottomNavigation() {
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setSelectedItemId(R.id.page_closet);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            Intent intent;
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.page_diary:
-                        intent = new Intent(getBaseContext(), DiaryActivity.class);
-                        startActivity(intent);
-                        overridePendingTransition(0, 0);
-                        break;
-                    case R.id.page_home:
-                        intent = new Intent(getBaseContext(), HomeActivity.class);
-                        startActivity(intent);
-                        overridePendingTransition(0, 0);
-                        break;
-                    case R.id.page_closet:
-                        //no changes (same page)
-                        break;
-                    default:
-                }
-                return true;
-            }
-        });
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +61,9 @@ public class MyClosetActivity  extends AppCompatActivity implements MyClosetPres
         buttonAdd = findViewById(R.id.button_closet_add);
         buttonAdd.setOnClickListener(this);
         buttonAdd.setVisibility(View.INVISIBLE); //add button visible only on edit mode
+        buttonBack = findViewById(R.id.button_closet_back);
+        buttonBack.setOnClickListener(this);
+        buttonBack.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -102,6 +79,9 @@ public class MyClosetActivity  extends AppCompatActivity implements MyClosetPres
                 //TODO : change page to editing mode
                 presenter.toEditMode();
                 break;
+            case R.id.button_closet_back :
+                presenter.toClosetMain();
+                break;
 
             case R.id.button_closet_sunny :
                 presenter.updateBackground(0);
@@ -116,10 +96,39 @@ public class MyClosetActivity  extends AppCompatActivity implements MyClosetPres
                 presenter.updateBackground(3);
                 break;
 
-            case R.id.button_closet_add :
+            case R.id.button_closet_add :   //move to AddClothesActivity
+                presenter.toAddMode();
                 break;
             default:
         }
+    }
+
+    protected void setBottomNavigation() {
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(R.id.page_closet);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            Intent intent;
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.page_diary:
+                        intent = new Intent(getBaseContext(), DiaryActivity.class);
+                        startActivity(intent);
+                        overridePendingTransition(0, 0);
+                        break;
+                    case R.id.page_home:
+                        intent = new Intent(getBaseContext(), HomeActivity.class);
+                        startActivity(intent);
+                        overridePendingTransition(0, 0);
+                        break;
+                    case R.id.page_closet:
+                        //no changes (same page)
+                        break;
+                    default:
+                }
+                return true;
+            }
+        });
     }
 
     @Override
@@ -167,16 +176,22 @@ public class MyClosetActivity  extends AppCompatActivity implements MyClosetPres
     @Override
     public void toClosetMain() {
         buttonAdd.setVisibility(View.INVISIBLE);
+        buttonBack.setVisibility(View.INVISIBLE);
+        buttonEdit.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void toEditMode() {
         buttonAdd.setVisibility(View.VISIBLE);
+        buttonBack.setVisibility(View.VISIBLE);
+        buttonEdit.setVisibility(View.INVISIBLE);
     }
 
     @Override
     public void toAddMode() {
-
+        Intent intent = new Intent(this, AddClothesActivity.class);
+        startActivity(intent);
+        overridePendingTransition(0, 0);
     }
 }
 
